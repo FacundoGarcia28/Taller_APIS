@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Tipos de cambio</h2>
+
+<button onclick="getExchangeRates()">Obtener tipos de cambio</button>
+
+<p id="rates"></p>
+
+<script>
+async function getExchangeRates() {
+    try {
+        const response = await fetch('https://api.frankfurter.app/latest');
+        const data = await response.json();
+        const rates = data.rates;
+        let text = '';
+        for (const currency in rates) {
+            text += `${currency}: ${rates[currency]}<br>`;
+        }
+        document.getElementById('rates').innerHTML = text;
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+</script>
+
+</body>
+</html>
